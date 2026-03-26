@@ -34,7 +34,7 @@ double trainEpoch(net &myNet, string filename, int epochNum) {
         double pixel;
         while (ss >> pixel) inputs.push_back(pixel);
 
-        if (inputs.size() == 1024) {
+        if (inputs.size() == 4096) {
             myNet.feedForward(inputs);
             myNet.backprop({target});
 
@@ -66,7 +66,7 @@ double trainEpoch(net &myNet, string filename, int epochNum) {
 }
 
 int main() {
-    vector<unsigned> topology = {1024, 64, 16, 1};
+    vector<unsigned> topology = {1024, 256, 64, 1};
     net myNet(topology);
 
     Neuron::alpha = 0.5;
@@ -101,7 +101,7 @@ int main() {
         vector<double> inputs;
         double p; while (ss >> p) inputs.push_back(p);
 
-        if (inputs.size() == 1024) {
+        if (inputs.size() == 4096) {
             myNet.feedForward(inputs);
             vector<double> results;
             myNet.getresults(results);
