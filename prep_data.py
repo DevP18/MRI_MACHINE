@@ -7,7 +7,7 @@ from scipy.ndimage import zoom
 root_dir = "BraTS-MEN-Train"
 TARGET_TRAIN = 1000
 TARGET_TEST  = 100
-RESIZE_TO    = (32, 32)
+RESIZE_TO    = (64, 64)
 
 MODALITIES = ["t1c", "t1n", "t2f", "t2w"]
 
@@ -67,7 +67,7 @@ def process_patient_list(folders, target_count):
             if len(modal_slices) != 4:
                 continue
 
-            combined = np.concatenate(modal_slices)
+            combined = np.mean(modal_slices, axis=0)
             label    = "1.0" if is_tumor else "0.0"
             samples.append(f"{label} " + " ".join(map(str, combined)))
             metadata.append(f"{folder}_{z}")
